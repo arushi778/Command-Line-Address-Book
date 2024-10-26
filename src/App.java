@@ -8,7 +8,10 @@ public class App {
             System.out.println("\nCommand Line Address Book");
             System.out.println("1. Add Entry");
             System.out.println("2. Display All Entries");
-            System.out.println("3. Exit");
+            System.out.println("3. Delete a File");
+            System.out.println("4. Save to a file");
+            System.out.println("5. Load from a file");
+            System.out.println("6. Exit");
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
@@ -33,11 +36,33 @@ public class App {
                     System.out.println("Displaying all entries:");
                     addressBook.displayAllEntries();
                     break;
-                case 3:
+                case 3:  
+                    System.out.print("Enter the name of the entry to delete: ");
+                    String nameToDelete = scanner.nextLine();
+                    boolean deleted = addressBook.deleteEntry(nameToDelete);
+                    if (deleted) {
+                    System.out.println("Entry deleted successfully.");
+                    } else {
+                    System.out.println("Entry not found.");
+                    }
+                    break;
+                case 4: 
+                    System.out.print("Enter filename to save to: ");
+                    String saveFilename = scanner.nextLine();
+                    addressBook.saveToFile(saveFilename);
+                    break;
+
+                case 5:  
+                    System.out.print("Enter filename to load from: ");
+                    String loadFilename = scanner.nextLine();
+                    addressBook.loadFromFile(loadFilename);
+                    break;
+
+                case 6:
                     System.out.println("Exiting...");
                     scanner.close();
                     return;
-                default:
+                    default:
                     System.out.println("Invalid option. Please try again.");
             }
         }
